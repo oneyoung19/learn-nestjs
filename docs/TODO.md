@@ -7,7 +7,7 @@
    - `nest g module [name]`
 4. `Injectable` 与 `Inject` 的使用场景
 5. 自定义 `Providers` 以及 `@Optional`
-6. `nestjs` 的生命周期
+6. `nestjs` 的生命周期及[生命周期事件](https://docs.nestjs.com/fundamentals/lifecycle-events)
     Incoming Request
       ↓
     [Middleware (Express)]
