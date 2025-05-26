@@ -2,6 +2,8 @@
 title: Nest.js
 ---
 
+[learn-nestjs](https://github.com/oneyoung19/learn-nestjs)
+
 ## 1.概述
 
 `Nest.js` 是一个强大、可扩展且渐进式的 `Node.js` 框架，用于构建高效且可扩展的服务器端应用程序。受 `Angular` 启发，`Nest.js` 利用 `TypeScript` 并结合了面向对象编程（`OOP`）、函数式编程（`FP`）和函数式响应式编程（`FRP`）的元素。
@@ -53,7 +55,35 @@ export class UsersService {
 }
 ```
 
-## 4.生态系统
+## 4.生命周期
+
+```txt
+Incoming Request
+      ↓
+[Middleware (Express)]
+  （基于 Express 层，适合处理日志、请求体解析等通用逻辑）
+      ↓
+[Nest Lifecycle]
+  ├─> Global Guards          ← 权限/认证控制（可依赖注入）
+  ├─> Route Guards
+      ↓
+  ├─> Global Pipes           ← 参数验证、转换
+  ├─> Route Pipes
+      ↓
+  ├─> Global Interceptors    ← 方法前：日志、缓存、格式包装等
+  ├─> Route Interceptors
+      ↓
+  ├─> Controller Handler     ← 执行业务处理逻辑（Service 等）
+      ↓
+  ├─> Route Interceptors     ← 方法后：结果包装、异常处理
+  ├─> Global Interceptors
+      ↓
+[If any error occurs at any step above]
+      ↓
+Exception Filters (Route → Global) ← 捕获异常，统一格式响应
+```
+
+## 5.生态系统
 
 - `ORM` 集成（`TypeORM`, `Mongoose`）
 - `GraphQL` 支持
@@ -63,14 +93,6 @@ export class UsersService {
 - 验证
 - 缓存
 - 任务调度
-
-## 5.为什么选择 Nest.js？
-
-- 可扩展的企业级应用
-- 现代开发实践
-- 优秀的文档
-- 庞大且不断增长的社区
-- 一致的架构模式
 
 ## 6.了解更多
 
